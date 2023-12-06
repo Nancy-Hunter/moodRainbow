@@ -21,8 +21,11 @@
 /* BASE STYLES
 /*******************************************/
 
-body {
-
+body{
+     color: rgb(94, 55, 191);
+     background-color: rgb(246, 246, 246);
+     font-family: Roboto, Arial, Helvetica, sans-serif;
+     text-align: center;
 }
 
 
