@@ -4,7 +4,7 @@ What is a mood anyways? A fleeting moment, a mercurial breeze, a passing feeling
 
 **Link to project:** to be added here
 
-<img src="<img src="https://i.ibb.co/gTphwwC/Screenshot-2023-12-06-192137.png" width="30%">
+<img src="https://i.ibb.co/gTphwwC/Screenshot-2023-12-06-192137.png" width="30%">
 
 ## How It's Made:
 
