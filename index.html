@@ -1,20 +1,38 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href = "css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Source+Sans+3:wght@300&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <h1>Mood Rainbow</h1>
-    <input id="userName" type="text" name="" placeholder="Enter Name">
-    <button id="clickMe" type="button" name="button">Click Me</button>
-    <h2 id="personName"></h2>
-    <h2 id="personStatus"></h2>
-    <h2 id="personOccupation"></h2>
-    <script type="text/javascript" src="/js/main.js"></script>
-  </body>
+    <title>Mood Rainbow</title>
+</head>
+<body>
+    <header class="logo">
+        <img src="https://i.ibb.co/gTphwwC/Screenshot-2023-12-06-192137.png" alt="Mood Rainbow">
+    </header>
+    <section class="wrapper">
+        <header>
+          <p class="current-month">Month</p>
+          <div class="icons">
+            <span id="prev" class="material-symbols-rounded"><</span>
+            <span id="next" class="material-symbols-rounded">></span>
+          </div>
+        </header>
+        <section class="calendar">
+          <ol class="weekdays">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+          </ol>
+          <ol class="days"></ol>
+        </section>
+    </section>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
 </html>
