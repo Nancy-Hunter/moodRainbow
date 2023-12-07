@@ -35,7 +35,6 @@ class Calendar {
     }
 
     setMonth(month) {
-        console.log(this.container.id, month)
         this.currMonth = month;
         if (this.currMonth < 0) {
             if (this.currMonth == -1) {
