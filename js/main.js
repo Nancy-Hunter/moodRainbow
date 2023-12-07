@@ -12,13 +12,10 @@
 //   document.querySelector("#personOccupation").textContent = data.currentOccupation
 // }
 
-let currDate = new Date()
-
-
 class Calendar {
-    constructor(containerSelector, date=currDate, linkedCalendar = null) {
+    constructor(containerSelector) {
         this.container = document.querySelector(containerSelector);
-        this.date = date;
+        this.date = new Date();
         this.currYear = this.date.getFullYear();
         this.currMonth = this.date.getMonth();
 
@@ -29,36 +26,14 @@ class Calendar {
         this.MONTHS = ["January", "February", "March", "April", "May", "June", "July",
                       "August", "September", "October", "November", "December"];
 
-        this.linkedCalendar = linkedCalendar;
-    }
-
-    setMonth(month) {
-        this.currMonth = month;
-        if (this.currMonth < 0) {
-            if (this.currMonth == -1) {
-                this.date = new Date(this.currYear - 1, 11, 1);
-            }
-            this.currYear = this.date.getFullYear();
-            this.currMonth = this.date.getMonth();
-        } else if (this.currMonth > 11) {
-            if (this.currMonth == 12) {
-                this.date = new Date(this.currYear + 1, this.currMonth % 12, 1);
-            } else { // 13 by default
-                this.date = new Date(this.currYear, this.currMonth % 12, 1);
-            }
-            this.currYear = this.date.getFullYear();
-            this.currMonth = this.date.getMonth();
-        } else {
-            this.date = new Date(this.currYear, this.currMonth, 1);
-        }
-        this.renderCalendar();
+        this.linkedCalendar = null;
     }
 
     incrementMonth() {
         if (this.currMonth == 11) {
             this.currMonth = 0
             this.currYear++
-            this.date = new Date(this.currYear, this.currMonth, 1)
+            this.date = new Date(this.currYear, this.currMonth, this.date.getDate())
         } else {
             this.currMonth++
         }
@@ -69,7 +44,7 @@ class Calendar {
         if (this.currMonth == 0) {
             this.currMonth = 11
             this.currYear--
-            this.date = new Date(this.currYear, this.currMonth, 1)
+            this.date = new Date(this.currYear, this.currMonth, this.date.getDate())
         } else {
             this.currMonth--
         }
@@ -133,19 +108,16 @@ const myCalendar = new Calendar("#calendar1");
 myCalendar.renderCalendar();
 myCalendar.initializeEventListeners();
 
-let prevMonth = new Date();
-prevMonth.setMonth(myCalendar.date.getMonth() - 1);
-prevMonth.setDate(1);
-const prevCalendar = new Calendar("#calendar0", prevMonth);
 
+const prevCalendar = new Calendar("#calendar0");
+prevCalendar.decrementMonth();
+console.log(prevCalendar)
 prevCalendar.renderCalendar();
 
-let nextMonth = new Date();
-nextMonth.setMonth(myCalendar.date.getMonth() + 1);
-nextMonth.setDate(1);
-const nextCalendar = new Calendar("#calendar2", nextMonth);
 
+const nextCalendar = new Calendar("#calendar2");
+nextCalendar.incrementMonth();
+console.log(nextCalendar)
+nextCalendar.renderCalendar();
 
 myCalendar.linkedCalendar = [prevCalendar, nextCalendar];
-
-nextCalendar.renderCalendar();
