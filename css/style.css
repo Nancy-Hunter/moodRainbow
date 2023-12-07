@@ -33,17 +33,23 @@ body{
    }
    .logo{
      justify-self: start;
+     margin-bottom: 5%;
    }
    .logo img{
      border-radius: 10px;
    }
-   .wrapper{
+   .calendar-container{
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+   }
+   .calendar-container > div{
      width: 450px;
      background: #fff;
      border-radius: 10px;
      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
    }
-   .wrapper header{
+   .calendar-container div header{
      display: flex;
      align-items: center;
      padding: 25px 30px 10px;
@@ -81,6 +87,7 @@ body{
      flex-wrap: wrap;
      list-style: none;
      text-align: center;
+     padding: 0;
    }
    .calendar .days{
      margin-bottom: 20px;
@@ -118,7 +125,8 @@ body{
      transform: translate(-50%, -50%);
    }
    .days li.active::before{
-     background: #9B59B6;
+     /* background: #9B59B6; */
+     background: #5F4D8D;
    }
    .days li:not(.active):hover::before{
      background: #f2f2f2;

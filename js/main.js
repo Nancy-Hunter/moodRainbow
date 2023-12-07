@@ -14,25 +14,27 @@
 
 
 class Calendar {
-    constructor() {
-        this.date = new Date();
+    constructor(containerSelector, date= new Date()) {
+        this.container = document.querySelector(containerSelector);
+        this.date = date
         this.currYear = this.date.getFullYear();
         this.currMonth = this.date.getMonth();
 
-        this.daysTag = document.querySelector(".days");
-        this.currentDate = document.querySelector(".current-month");
-        this.prevNextIcon = document.querySelectorAll(".icons span");
+        // calendar1 -> section -> ol.days
+        // this.daysTag = document.querySelector(".days");
+        console.log(this.container)
+        this.daysTag = this.container.querySelector(".days");
+        this.currentDate = this.container.querySelector(".current-month");
+        this.prevNextIcon = this.container.querySelectorAll(".icons span");
 
         this.MONTHS = ["January", "February", "March", "April", "May", "June", "July",
                       "August", "September", "October", "November", "December"];
 
-        this.renderCalendar();
-        this.initializeEventListeners();
+        // this.renderCalendar();
+        // this.initializeEventListeners();
     }
 
     renderCalendar() {
-
-        // TODO: Render inactive months
 
         let firstDayofMonth = new Date(this.currYear, this.currMonth, 1).getDay();
         let lastDateofMonth = new Date(this.currYear, this.currMonth + 1, 0).getDate();
@@ -77,4 +79,22 @@ class Calendar {
     }
 }
 
-const myCalendar = new Calendar();
+
+
+
+const myCalendar = new Calendar("#calendar1");
+myCalendar.renderCalendar()
+myCalendar.initializeEventListeners()
+
+let prevMonth = new Date()
+prevMonth.setMonth(myCalendar.date.getMonth() - 1)
+prevMonth.setDate(1)
+const prevCalendar = new Calendar("#calendar0", prevMonth);
+prevCalendar.renderCalendar()
+
+let nextMonth = new Date()
+nextMonth.setMonth(myCalendar.date.getMonth() + 1)
+nextMonth.setDate(1)
+const nextCalendar = new Calendar("#calendar2", nextMonth);
+nextCalendar.renderCalendar()
+nextCalendar.initializeEventListeners()

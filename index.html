@@ -12,7 +12,31 @@
     <header class="logo">
         <img src="https://i.ibb.co/gTphwwC/Screenshot-2023-12-06-192137.png" alt="Mood Rainbow">
     </header>
-    <section class="wrapper">
+    <section class="calendar-container">
+      <div id="calendar0" class="calendar">
+        <!-- Previous Calendar -->
+        <header>
+          <p class="current-month">Month</p>
+          <div class="icons">
+            <!-- <span id="prev" class="material-symbols-rounded"><</span> -->
+            <!-- <span id="next" class="material-symbols-rounded">></span> -->
+          </div>
+        </header>
+        <section class="calendar">
+          <ol class="weekdays">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+          </ol>
+          <ol class="days"></ol>
+        </section>
+      </div>
+      <!-- Current Calendar -->
+      <div id="calendar1" class="calendar">
         <header>
           <p class="current-month">Month</p>
           <div class="icons">
@@ -32,6 +56,30 @@
           </ol>
           <ol class="days"></ol>
         </section>
+      </div>
+      <div id="calendar2" class="calendar">
+        <!-- Next Calendar -->
+        <header>
+          <p class="current-month">Month</p>
+          <div class="icons">
+            <!-- <span id="prev" class="material-symbols-rounded"><</span>
+            <span id="next" class="material-symbols-rounded">></span> -->
+          </div>
+        </header>
+        <section class="calendar">
+          <ol class="weekdays">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+          </ol>
+          <ol class="days"></ol>
+        </section>
+        <!-- Replicate the structure of the first calendar here -->
+      </div>
     </section>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
