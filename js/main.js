@@ -12,21 +12,23 @@
 //   document.querySelector("#personOccupation").textContent = data.currentOccupation
 // }
 
-const daysTag = document.querySelector(".days"),
-currentDate = document.querySelector(".current-month"),
-prevNextIcon = document.querySelectorAll(".icons span");
+const daysTag = document.querySelector(".days")
+const currentDate = document.querySelector(".current-month")
+const prevNextIcon = document.querySelectorAll(".icons span")
 // getting new date, current year and month
-let date = new Date(),
-currYear = date.getFullYear(),
-currMonth = date.getMonth();
+let date = new Date()
+let currYear = date.getFullYear()
+let currMonth = date.getMonth()
+let colorPalette = []
+let colorTarget 
 // storing full name of all months in array
 const months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
 const renderCalendar = () => {
-    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first weekday of month
-    lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date (number day) of month
-    lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last weekday of month
-    lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date (number day) of previous month
+    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() // getting first weekday of month
+    let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate() // getting last date (number day) of month
+    let lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay() // getting last weekday of month
+    let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate() // getting last date (number day) of previous month
     let liTag = "";
     for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
         liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
@@ -44,6 +46,7 @@ const renderCalendar = () => {
     daysTag.innerHTML = liTag;
 }
 renderCalendar();
+
 prevNextIcon.forEach(icon => { // getting prev and next icons
     icon.addEventListener("click", () => { // adding click event on both icons
         // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
@@ -58,4 +61,37 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
         }
         renderCalendar(); // calling renderCalendar function
     });
-});
+})
+
+function addColor () {
+    let li = document.createElement('li')
+
+    li.textContent = document.querySelector('#popup').value
+
+    document.querySelector('#palette').append(li)
+    
+    colorPalette.push(input.value)// adds nav list to an array
+
+    document.getElementById('palette').addEventListener('click', function (e) {
+        //adds eventlistners to navigation bar drinks
+            if(e.target && e.target.nodeName == "LI") {
+            // List item found!  Output the ID!
+                console.log(e.target.textContent);
+                colorTarget =  e.target.textContent
+            }
+        })
+}
+
+function clickMe() {
+    let text = document.getElementById("popup");
+    text.classList.toggle("hide");
+    text.classList.toggle("show");
+    let color = document.getElementById("popupColor");
+    color.classList.toggle("hide");
+    color.classList.toggle("show");
+    document.querySelector("html").addEventListener("keypress", function (press) {
+          if (press.key === "Enter") {
+            addColor()
+          }
+      })
+  }
