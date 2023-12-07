@@ -12,17 +12,16 @@
 //   document.querySelector("#personOccupation").textContent = data.currentOccupation
 // }
 
+let currDate = new Date()
+
 
 class Calendar {
-    constructor(containerSelector, date= new Date()) {
+    constructor(containerSelector, date=currDate, linkedCalendar = null) {
         this.container = document.querySelector(containerSelector);
-        this.date = date
+        this.date = date;
         this.currYear = this.date.getFullYear();
         this.currMonth = this.date.getMonth();
 
-        // calendar1 -> section -> ol.days
-        // this.daysTag = document.querySelector(".days");
-        console.log(this.container)
         this.daysTag = this.container.querySelector(".days");
         this.currentDate = this.container.querySelector(".current-month");
         this.prevNextIcon = this.container.querySelectorAll(".icons span");
@@ -30,8 +29,32 @@ class Calendar {
         this.MONTHS = ["January", "February", "March", "April", "May", "June", "July",
                       "August", "September", "October", "November", "December"];
 
+        this.linkedCalendar = linkedCalendar;
         // this.renderCalendar();
         // this.initializeEventListeners();
+    }
+
+    setMonth(month) {
+        console.log(this.container.id, month)
+        this.currMonth = month;
+        if (this.currMonth < 0) {
+            if (this.currMonth == -1) {
+                this.date = new Date(this.currYear - 1, 11, 1);
+            }
+            this.currYear = this.date.getFullYear();
+            this.currMonth = this.date.getMonth();
+        } else if (this.currMonth > 11) {
+            if (this.currMonth == 12) {
+                this.date = new Date(this.currYear + 1, this.currMonth % 12, 1);
+            } else { // its 13
+                this.date = new Date(this.currYear, this.currMonth % 12, 1);
+            }
+            this.currYear = this.date.getFullYear();
+            this.currMonth = this.date.getMonth();
+        } else {
+            this.date = new Date(this.currYear, this.currMonth, 1);
+        }
+        this.renderCalendar();
     }
 
     renderCalendar() {
@@ -63,38 +86,49 @@ class Calendar {
     initializeEventListeners() {
         this.prevNextIcon.forEach(icon => {
             icon.addEventListener("click", () => {
-                this.currMonth = icon.id === "prev" ? this.currMonth - 1 : this.currMonth + 1;
+                // Determine the direction of the change
+                const direction = icon.id === "prev" ? -1 : 1;
+                let newMonth = this.currMonth + direction;
+                // console.log(newMonth, direction)
+                this.setMonth(newMonth);
 
-                if (this.currMonth < 0 || this.currMonth > 11) {
-                    this.date = new Date(this.currYear, this.currMonth, new Date().getDate());
-                    this.currYear = this.date.getFullYear();
-                    this.currMonth = this.date.getMonth();
-                } else {
-                    this.date = new Date();
+                if (this.linkedCalendar) {
+                    console.log(newMonth + 1)
+                    if (newMonth === 10 && direction === -1) {
+                        this.linkedCalendar[1].setMonth(direction)
+                    } else {
+                        this.linkedCalendar[1].setMonth(newMonth + 1)
+                    }
+                    console.log(newMonth - 1)
+                    if (newMonth === -1 && direction === -1) {
+                        this.linkedCalendar[0].setMonth(10)
+                    } else {
+                        this.linkedCalendar[0].setMonth(newMonth - 1)
+                    }
                 }
-
-                this.renderCalendar();
             });
         });
     }
 }
 
-
-
-
 const myCalendar = new Calendar("#calendar1");
-myCalendar.renderCalendar()
-myCalendar.initializeEventListeners()
+myCalendar.renderCalendar();
+myCalendar.initializeEventListeners();
 
-let prevMonth = new Date()
-prevMonth.setMonth(myCalendar.date.getMonth() - 1)
-prevMonth.setDate(1)
+let prevMonth = new Date();
+prevMonth.setMonth(myCalendar.date.getMonth() - 1);
+prevMonth.setDate(1);
 const prevCalendar = new Calendar("#calendar0", prevMonth);
-prevCalendar.renderCalendar()
 
-let nextMonth = new Date()
-nextMonth.setMonth(myCalendar.date.getMonth() + 1)
-nextMonth.setDate(1)
+prevCalendar.renderCalendar();
+
+let nextMonth = new Date();
+nextMonth.setMonth(myCalendar.date.getMonth() + 1);
+nextMonth.setDate(1);
+console.log(nextMonth, nextMonth.getMonth())
 const nextCalendar = new Calendar("#calendar2", nextMonth);
-nextCalendar.renderCalendar()
-nextCalendar.initializeEventListeners()
+
+
+myCalendar.linkedCalendar = [prevCalendar, nextCalendar];
+
+nextCalendar.renderCalendar();
