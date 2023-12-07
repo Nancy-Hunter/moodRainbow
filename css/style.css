@@ -1,4 +1,5 @@
 body{
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -7,8 +8,18 @@ body{
   min-height: 100vh;
   background: #9B59B6;
 }
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  margin: 2rem;
+}
 .wrapper{
-  width: 450px;
+  width: 40%;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.12);
