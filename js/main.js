@@ -30,8 +30,6 @@ class Calendar {
                       "August", "September", "October", "November", "December"];
 
         this.linkedCalendar = linkedCalendar;
-        // this.renderCalendar();
-        // this.initializeEventListeners();
     }
 
     setMonth(month) {
@@ -54,6 +52,29 @@ class Calendar {
             this.date = new Date(this.currYear, this.currMonth, 1);
         }
         this.renderCalendar();
+    }
+
+    incrementMonth() {
+        if (this.currMonth == 11) {
+            this.currMonth = 0
+            this.currYear++
+            this.date = new Date(this.currYear, this.currMonth, 1)
+        } else {
+            this.currMonth++
+        }
+        this.renderCalendar();
+    }
+
+    decrementMonth() {
+        if (this.currMonth == 0) {
+            this.currMonth = 11
+            this.currYear--
+            this.date = new Date(this.currYear, this.currMonth, 1)
+        } else {
+            this.currMonth--
+        }
+        this.renderCalendar();
+
     }
 
     renderCalendar() {
@@ -88,18 +109,20 @@ class Calendar {
                 // Determine the direction of the change
                 const direction = icon.id === "prev" ? -1 : 1;
                 let newMonth = this.currMonth + direction;
-                this.setMonth(newMonth);
+                console.log(direction)
+                if (direction == 1) {
+                    this.incrementMonth();
+                } else {
+                    this.decrementMonth();
+                }
 
                 if (this.linkedCalendar) {
-                    if (newMonth === 10 && direction === -1) {
-                        this.linkedCalendar[1].setMonth(direction)
+                    if (direction == 1) {
+                        this.linkedCalendar[0].incrementMonth();
+                        this.linkedCalendar[1].incrementMonth();
                     } else {
-                        this.linkedCalendar[1].setMonth(newMonth + 1)
-                    }
-                    if (newMonth === -1 && direction === -1) {
-                        this.linkedCalendar[0].setMonth(10)
-                    } else {
-                        this.linkedCalendar[0].setMonth(newMonth - 1)
+                        this.linkedCalendar[0].decrementMonth();
+                        this.linkedCalendar[1].decrementMonth();
                     }
                 }
             });
