@@ -23,10 +23,10 @@ currMonth = date.getMonth();
 const months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
 const renderCalendar = () => {
-    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first weekday of month
-    lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date (number day) of month
-    lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last weekday of month
-    lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date (number day) of previous month
+    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() // getting first weekday of month
+    let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate() // getting last date (number day) of month
+    let lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay() // getting last weekday of month
+    let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate() // getting last date (number day) of previous month
     let liTag = "";
     for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
         liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
