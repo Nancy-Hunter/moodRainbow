@@ -46,7 +46,7 @@ class Calendar {
         } else if (this.currMonth > 11) {
             if (this.currMonth == 12) {
                 this.date = new Date(this.currYear + 1, this.currMonth % 12, 1);
-            } else { // its 13
+            } else { // 13 by default
                 this.date = new Date(this.currYear, this.currMonth % 12, 1);
             }
             this.currYear = this.date.getFullYear();
@@ -89,17 +89,14 @@ class Calendar {
                 // Determine the direction of the change
                 const direction = icon.id === "prev" ? -1 : 1;
                 let newMonth = this.currMonth + direction;
-                // console.log(newMonth, direction)
                 this.setMonth(newMonth);
 
                 if (this.linkedCalendar) {
-                    console.log(newMonth + 1)
                     if (newMonth === 10 && direction === -1) {
                         this.linkedCalendar[1].setMonth(direction)
                     } else {
                         this.linkedCalendar[1].setMonth(newMonth + 1)
                     }
-                    console.log(newMonth - 1)
                     if (newMonth === -1 && direction === -1) {
                         this.linkedCalendar[0].setMonth(10)
                     } else {
@@ -125,7 +122,6 @@ prevCalendar.renderCalendar();
 let nextMonth = new Date();
 nextMonth.setMonth(myCalendar.date.getMonth() + 1);
 nextMonth.setDate(1);
-console.log(nextMonth, nextMonth.getMonth())
 const nextCalendar = new Calendar("#calendar2", nextMonth);
 
 
