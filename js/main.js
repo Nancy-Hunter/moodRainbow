@@ -1,17 +1,3 @@
-// document.querySelector('#clickMe').addEventListener('click', makeReq)
-
-// async function makeReq(){
-
-//   const userName = document.querySelector("#userName").value;
-//   const res = await fetch(`/api?student=${userName}`)
-//   const data = await res.json()
-
-//   console.log(data);
-//   document.querySelector("#personName").textContent = data.name
-//   document.querySelector("#personStatus").textContent = data.status
-//   document.querySelector("#personOccupation").textContent = data.currentOccupation
-// }
-
 class Calendar {
     constructor(containerSelector) {
         this.container = document.querySelector(containerSelector);
@@ -104,20 +90,18 @@ class Calendar {
     }
 }
 
-const myCalendar = new Calendar("#calendar1");
-myCalendar.renderCalendar();
-myCalendar.initializeEventListeners();
 
 
 const prevCalendar = new Calendar("#calendar0");
 prevCalendar.decrementMonth();
-console.log(prevCalendar)
 prevCalendar.renderCalendar();
 
+const myCalendar = new Calendar("#calendar1");
+myCalendar.renderCalendar();
+myCalendar.initializeEventListeners();
 
 const nextCalendar = new Calendar("#calendar2");
 nextCalendar.incrementMonth();
-console.log(nextCalendar)
 nextCalendar.renderCalendar();
 
 myCalendar.linkedCalendar = [prevCalendar, nextCalendar];
