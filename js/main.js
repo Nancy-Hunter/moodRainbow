@@ -108,8 +108,7 @@ class Calendar {
             icon.addEventListener("click", () => {
                 // Determine the direction of the change
                 const direction = icon.id === "prev" ? -1 : 1;
-                let newMonth = this.currMonth + direction;
-                console.log(direction)
+
                 if (direction == 1) {
                     this.incrementMonth();
                 } else {
