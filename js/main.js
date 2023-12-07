@@ -12,19 +12,6 @@
 //   document.querySelector("#personOccupation").textContent = data.currentOccupation
 // }
 
-const daysTag = document.querySelector(".days"),
-currentDate = document.querySelector(".current-month"),
-prevNextIcon = document.querySelectorAll(".icons span");
-
-// getting new date, current year and month
-let date = new Date(),
-currYear = date.getFullYear(),
-currMonth = date.getMonth();
-
-// storing full name of all months in array
-const MONTHS = ["January", "February", "March", "April", "May", "June", "July",
-              "August", "September", "October", "November", "December"];
-
 
 class Calendar {
     constructor() {
@@ -44,6 +31,9 @@ class Calendar {
     }
 
     renderCalendar() {
+
+        // TODO: Render inactive months
+
         let firstDayofMonth = new Date(this.currYear, this.currMonth, 1).getDay();
         let lastDateofMonth = new Date(this.currYear, this.currMonth + 1, 0).getDate();
         let lastDayofMonth = new Date(this.currYear, this.currMonth, lastDateofMonth).getDay();
