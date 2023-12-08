@@ -20,7 +20,7 @@ let date = new Date()
 let currYear = date.getFullYear()
 let currMonth = date.getMonth()
 let colorPalette = []
-let colorTarget 
+let currentColor
 // storing full name of all months in array
 const months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
@@ -63,21 +63,25 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
     });
 })
 
-function addColor () {
+function addColor () { 
     let li = document.createElement('li')
+    let colorSquare = document.createElement('div')
 
     li.textContent = document.querySelector('#popup').value
-
+    colorSquare.textContent = ' .'
+    li.setAttribute ('name', document.querySelector('#popupColor').value)
+    colorSquare.setAttribute ('name', document.querySelector('#popupColor').value)
+    console.log(li.name)
+    colorSquare.style.background = document.querySelector('#popupColor').value
     document.querySelector('#palette').append(li)
+    li.prepend(colorSquare)
     
-    colorPalette.push(input.value)// adds nav list to an array
-
     document.getElementById('palette').addEventListener('click', function (e) {
-        //adds eventlistners to navigation bar drinks
+        //adds eventlistners to palette
             if(e.target && e.target.nodeName == "LI") {
             // List item found!  Output the ID!
-                console.log(e.target.textContent);
-                colorTarget =  e.target.textContent
+                console.log(e.target.name);
+                currentColor =  e.target.name
             }
         })
 }
@@ -92,6 +96,7 @@ function clickMe() {
     document.querySelector("html").addEventListener("keypress", function (press) {
           if (press.key === "Enter") {
             addColor()
+            document.getElementById("palette").classList.add("show");
           }
       })
   }

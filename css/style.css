@@ -116,3 +116,62 @@ form {
 .show {
   display: block;
 }
+
+.palette-wrapper {
+  background: #f2f2f2;
+  border-radius: 10px;
+  display: flex;
+  
+  align-items: center;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.options-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.palette-wrapper button {
+  color: white;
+  border: none;
+  background: #9B59B6;
+  font-size: 1em;
+  border-radius: 50%;
+  padding: .8em;
+  margin: 1.5em;
+}
+
+#popup {
+  height: 2em;
+  border-radius: 5px;
+  font-size: 1em;
+  border: solid rgb(93,76,139) .1em;
+  padding-left: .8em;
+  margin: 0 1em;
+}
+
+#popupColor {
+  border:none;
+  padding: 0;
+  height: 3em;
+}
+
+#palette li {
+  list-style-type: none;
+  font-size: 1.2em;
+  margin: 1em;
+}
+
+#palette div {
+  display: inline-block;
+  margin: .5em;
+  width: 1em;
+  color: transparent;
+}

@@ -12,6 +12,19 @@
     <header class="logo">
         <img src="https://i.ibb.co/gTphwwC/Screenshot-2023-12-06-192137.png" alt="Mood Rainbow">
     </header>
+
+    <section class = "palette-wrapper">
+      <div class="options-wrapper"><h3>Color Palette</h3>
+        <div class="input-wrapper">
+          <button id="theButton" onclick="clickMe()">Add Paint</button>
+          <input type="text" name="popup" id="popup" class="hide" placeholder="How do you feel?">
+          <input type="color" id="popupColor" name="popupColor" class="hide">
+        </div>
+      </div>
+      <ul id = "palette" class="hide">
+      </ul> 
+    </section>
+
     <section class="wrapper">
         <header>
           <p class="current-month">Month</p>
@@ -33,14 +46,7 @@
           <ol class="days"></ol>
         </section>
     </section>
-    <section class = "palette-wrapper">
-      <ul id = "palette">
-        <li>Color Palette</li>
-      </ul>
-      <button id="theButton" onclick="clickMe()">Click me!</button>
-      <input type="text" name="popup" id="popup" class="hide">
-      <input type="color" id="popupColor" name="popupColor" class="hide">
-    </section>
+    
     
     <script type="text/javascript" src="js/main.js"></script>
 </body>
