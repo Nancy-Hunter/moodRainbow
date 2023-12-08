@@ -105,3 +105,46 @@ nextCalendar.incrementMonth();
 nextCalendar.renderCalendar();
 
 myCalendar.linkedCalendar = [prevCalendar, nextCalendar];
+
+
+// Color Palette JS can go here:
+// let colorPalette = []
+// let colorTarget
+
+// function addColor() {
+//     let li = document.createElement('li')
+//     let colorSquare = document.createElement('div')
+
+//     li.textContent = document.querySelector('#popup').value
+//     colorSquare.textContent = ' .'
+//     li.setAttribute ('name', document.querySelector('#popupColor').value)
+//     colorSquare.setAttribute ('name', document.querySelector('#popupColor').value)
+//     console.log(li.name)
+//     colorSquare.style.background = document.querySelector('#popupColor').value
+//     document.querySelector('#palette').append(li)
+//     li.prepend(colorSquare)
+
+//     document.getElementById('palette').addEventListener('click', function (e) {
+//         //adds eventlistners to palette
+//             if(e.target && e.target.nodeName == "LI") {
+//             // List item found!  Output the ID!
+//                 console.log(e.target.name);
+//                 currentColor =  e.target.name
+//             }
+//     })
+// }
+
+// function clickMe() {
+//     let text = document.getElementById("popup");
+//     text.classList.toggle("hide");
+//     text.classList.toggle("show");
+//     let color = document.getElementById("popupColor");
+//     color.classList.toggle("hide");
+//     color.classList.toggle("show");
+//     document.querySelector("html").addEventListener("keypress", function (press) {
+//           if (press.key === "Enter") {
+//             addColor()
+//             document.getElementById("palette").classList.add("show");
+//           }
+//       })
+// }
