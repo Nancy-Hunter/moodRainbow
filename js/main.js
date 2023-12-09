@@ -1,68 +1,115 @@
-// document.querySelector('#clickMe').addEventListener('click', makeReq)
+class Calendar {
+    constructor(containerSelector) {
+        this.container = document.querySelector(containerSelector);
+        this.date = new Date();
+        this.currYear = this.date.getFullYear();
+        this.currMonth = this.date.getMonth();
 
-// async function makeReq(){
+        this.daysTag = this.container.querySelector(".days");
+        this.currentDate = this.container.querySelector(".current-month");
+        this.prevNextIcon = this.container.querySelectorAll(".icons span");
 
-//   const userName = document.querySelector("#userName").value;
-//   const res = await fetch(`/api?student=${userName}`)
-//   const data = await res.json()
+        this.MONTHS = ["January", "February", "March", "April", "May", "June", "July",
+                      "August", "September", "October", "November", "December"];
 
-//   console.log(data);
-//   document.querySelector("#personName").textContent = data.name
-//   document.querySelector("#personStatus").textContent = data.status
-//   document.querySelector("#personOccupation").textContent = data.currentOccupation
-// }
-
-const daysTag = document.querySelector(".days")
-const currentDate = document.querySelector(".current-month")
-const prevNextIcon = document.querySelectorAll(".icons span")
-// getting new date, current year and month
-let date = new Date()
-let currYear = date.getFullYear()
-let currMonth = date.getMonth()
-let colorPalette = []
-let currentColor
-// storing full name of all months in array
-const months = ["January", "February", "March", "April", "May", "June", "July",
-              "August", "September", "October", "November", "December"];
-const renderCalendar = () => {
-    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() // getting first weekday of month
-    let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate() // getting last date (number day) of month
-    let lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay() // getting last weekday of month
-    let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate() // getting last date (number day) of previous month
-    let liTag = "";
-    for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
-        liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
+        this.linkedCalendar = null;
     }
-    for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
-        // adding active class to li if the current day, month, and year matched
-        let isToday = i === date.getDate() && currMonth === new Date().getMonth() 
-                     && currYear === new Date().getFullYear() ? "active" : "";
-        liTag += `<li class="${isToday}">${i}</li>`;
-    }
-    for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days
-        liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
-    }
-    currentDate.innerText = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
-    daysTag.innerHTML = liTag;
-}
-renderCalendar();
 
-prevNextIcon.forEach(icon => { // getting prev and next icons
-    icon.addEventListener("click", () => { // adding click event on both icons
-        // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
-        currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
-        if(currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
-            // creating a new date of current year & month and pass it as date value
-            date = new Date(currYear, currMonth, new Date().getDate());
-            currYear = date.getFullYear(); // updating current year with new date year
-            currMonth = date.getMonth(); // updating current month with new date month
+    incrementMonth() {
+        if (this.currMonth == 11) {
+            this.currMonth = 0
+            this.currYear++
+            this.date = new Date(this.currYear, this.currMonth, this.date.getDate())
         } else {
-            date = new Date(); // pass the current date as date value
+            this.currMonth++
         }
-        renderCalendar(); // calling renderCalendar function
-    });
-})
+        this.renderCalendar();
+    }
 
+    decrementMonth() {
+        if (this.currMonth == 0) {
+            this.currMonth = 11
+            this.currYear--
+            this.date = new Date(this.currYear, this.currMonth, this.date.getDate())
+        } else {
+            this.currMonth--
+        }
+        this.renderCalendar();
+
+    }
+
+    renderCalendar() {
+
+        let firstDayofMonth = new Date(this.currYear, this.currMonth, 1).getDay();
+        let lastDateofMonth = new Date(this.currYear, this.currMonth + 1, 0).getDate();
+        let lastDayofMonth = new Date(this.currYear, this.currMonth, lastDateofMonth).getDay();
+        let lastDateofLastMonth = new Date(this.currYear, this.currMonth, 0).getDate();
+        let liTag = "";
+
+        for (let i = firstDayofMonth; i > 0; i--) {
+            liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
+        }
+
+        for (let i = 1; i <= lastDateofMonth; i++) {
+            let isToday = i === this.date.getDate() && this.currMonth === new Date().getMonth()
+                        && this.currYear === new Date().getFullYear() ? "active" : "";
+            liTag += `<li class="${isToday}">${i}</li>`;
+        }
+
+        for (let i = lastDayofMonth; i < 6; i++) {
+            liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`;
+        }
+
+        this.currentDate.innerText = `${this.MONTHS[this.currMonth]} ${this.currYear}`;
+        this.daysTag.innerHTML = liTag;
+    }
+
+    initializeEventListeners() {
+        this.prevNextIcon.forEach(icon => {
+            icon.addEventListener("click", () => {
+                // Determine the direction of the change
+                const direction = icon.id === "prev" ? -1 : 1;
+
+                if (direction == 1) {
+                    this.incrementMonth();
+                } else {
+                    this.decrementMonth();
+                }
+
+                if (this.linkedCalendar) {
+                    if (direction == 1) {
+                        this.linkedCalendar[0].incrementMonth();
+                        this.linkedCalendar[1].incrementMonth();
+                    } else {
+                        this.linkedCalendar[0].decrementMonth();
+                        this.linkedCalendar[1].decrementMonth();
+                    }
+                }
+            });
+        });
+    }
+}
+
+
+
+const prevCalendar = new Calendar("#calendar0");
+prevCalendar.decrementMonth();
+prevCalendar.renderCalendar();
+
+const myCalendar = new Calendar("#calendar1");
+myCalendar.renderCalendar();
+myCalendar.initializeEventListeners();
+
+const nextCalendar = new Calendar("#calendar2");
+nextCalendar.incrementMonth();
+nextCalendar.renderCalendar();
+
+myCalendar.linkedCalendar = [prevCalendar, nextCalendar];
+
+
+// Color Palette JS can go here:
+let colorPalette = []
+let colorTarget
 function addColor () { 
     let li = document.createElement('li')
     let colorSquare = document.createElement('div')
