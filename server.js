@@ -34,9 +34,9 @@ const server = http.createServer((req, res) => {
       if(params['student']== 'leon'){
         res.writeHead(200, {'Content-Type': 'application/json'});
         const objToJson = {
-          name: "leon",
-          status: "Boss Man",
-          currentOccupation: "Baller"
+          name: "Ben",
+          status: "Writing bad code",
+          currentOccupation: "Software Developer"
         }
         res.end(JSON.stringify(objToJson));
       }//student = leon
