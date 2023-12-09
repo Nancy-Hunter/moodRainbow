@@ -20,10 +20,16 @@
 /******************************************
 /* BASE STYLES
 /*******************************************/
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 
 body {
     display: flex;
-    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
     align-items: center;
     flex-direction: column;
     padding: 0 10px;
@@ -67,7 +73,7 @@ body {
  .logo img{
      border-radius: 10px;
   }
-.wrapper{
+/* .wrapper{
   width: 40%;
   background: #fff;
   border-radius: 10px;
@@ -78,7 +84,7 @@ body {
   align-items: center;
   padding: 25px 30px 10px;
   justify-content: space-between;
-}
+} */
 header .icons{
   display: flex;
 }
